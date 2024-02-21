@@ -4,22 +4,12 @@ class Solution {
             return false;
         }
         int temp = x;
-        int r = 0;
-        boolean exceed = false;
-        
-        while (temp != 0) {
-            r += temp % 10;
-            temp /= 10;
+        int reversed = 0;
 
-            if (r > Integer.MAX_VALUE / 10) {
-                exceed = true;
-                break;
-            }
-            r *= 10;
+        while (temp != 0) {
+            reversed = reversed * 10 + temp % 10;
+            temp /= 10;
         }
-        if (!exceed) {
-            r /= 10;
-        }
-        return r == x;
+        return reversed == x;
     }
 }
