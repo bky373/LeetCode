@@ -20,13 +20,13 @@ class Solution {
                 l1 = l1.next;
                 arr[cursor++] = l1.val;
             } else {
-                arr[cursor++] = 0;
+                cursor++;
             }
             if (l2.next != null) {
                 l2 = l2.next;
                 arr[cursor++] = l2.val;
             } else {
-                arr[cursor++] = 0;
+                cursor++;
             }
         }
         ListNode initNode = new ListNode(0);
