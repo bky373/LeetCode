@@ -33,14 +33,11 @@ class Solution {
         ListNode curNode = initNode;
         int temp = 0;
         for (int i = 0; i < cursor; i += 2) {
-            int a = arr[i];
-            int b = arr[i + 1];
-            int c = a + b + temp;
-
+            int x = arr[i] + arr[i + 1] + temp;
             temp = 0;
-            curNode.next = new ListNode(c % 10);
+            curNode.next = new ListNode(x % 10);
             curNode = curNode.next;
-            if (c >= 10) {
+            if (x >= 10) {
                 temp = 1;
             }
         }
@@ -48,5 +45,5 @@ class Solution {
             curNode.next = new ListNode(1);
         }
         return initNode.next;
-    }   
+    }
 }
