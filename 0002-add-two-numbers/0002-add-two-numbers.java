@@ -13,27 +13,24 @@ class Solution {
         ListNode initNode = new ListNode(-1);
         ListNode curNode = initNode;
         int temp = 0;
-        int x, a, b;
+        int x = 0;
         while (l1 != null || l2 != null) {
             if (l1 != null) {
-                a = l1.val;
+                x += l1.val;
                 l1 = l1.next;
-            } else {
-                a = 0;
             }
             if (l2 != null) {
-                b = l2.val;
+                x += l2.val;
                 l2 = l2.next;
-            } else {
-                b = 0;
             }
-            x = a + b + temp;
+            x += temp;
             curNode.next = new ListNode(x % 10);
             curNode = curNode.next;
             temp = 0;
             if (x >= 10) {
                 temp = 1;
             }
+            x = 0;
         }
         if (temp == 1) {
             curNode.next = new ListNode(1);
