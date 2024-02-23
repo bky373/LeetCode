@@ -12,7 +12,7 @@ class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode initNode = new ListNode(-1);
         ListNode curNode = initNode;
-        int temp = 0;
+    
         int x = 0;
         while (l1 != null || l2 != null) {
             if (l1 != null) {
@@ -23,16 +23,16 @@ class Solution {
                 x += l2.val;
                 l2 = l2.next;
             }
-            x += temp;
             curNode.next = new ListNode(x % 10);
             curNode = curNode.next;
-            temp = 0;
+            
             if (x >= 10) {
-                temp = 1;
+                x = 1;
+            } else {
+                x = 0;
             }
-            x = 0;
         }
-        if (temp == 1) {
+        if (x == 1) {
             curNode.next = new ListNode(1);
         }
         return initNode.next;
