@@ -1,12 +1,14 @@
 class Solution {
     public int firstUniqChar(String s) {
-        int[] letterCounts = new int[26];
+        int len = s.length();
+        Map<Character, Integer> counts = new HashMap<>();
 
-        for (int i = 0; i < s.length(); i++) {
-            letterCounts[s.charAt(i) - 97]++;
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            counts.put(c, counts.getOrDefault(c, 0) + 1);
         }
-        for (int i = 0; i < s.length(); i++) {
-            if (letterCounts[s.charAt(i) - 97] == 1) {
+        for (int i = 0; i < len; i++) {
+            if (counts.get(s.charAt(i)) == 1) {
                 return i;
             }
         }
