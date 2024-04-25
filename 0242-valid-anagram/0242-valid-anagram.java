@@ -1,11 +1,19 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        char[] sChars = s.toCharArray();
-        char[] tChars = t.toCharArray();
+        if (s.length() != t.length()) {
+            return false;
+        }
         
-        Arrays.sort(sChars);
-        Arrays.sort(tChars);
-        
-        return Arrays.equals(sChars, tChars);
+        int[] alpCnt = new int[26];
+        for (int i=0; i<s.length(); i++) {
+            alpCnt[s.charAt(i) - 'a']++;
+            alpCnt[t.charAt(i) - 'a']--; 
+        }
+        for (int cnt : alpCnt) {
+            if (cnt != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
