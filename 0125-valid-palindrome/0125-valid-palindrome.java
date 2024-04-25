@@ -4,27 +4,28 @@ class Solution {
             return true;
         }
         s = s.toLowerCase();
-        int i=0, j=s.length() - 1;
-        while (i<j) {
-            if (!isAlphaNumeric(s.charAt(i))) {
-                i++;
+        
+        int j = s.length() - 1;
+        for (int i=0; i<j; i++) {
+            if (!isAlpNum(s.charAt(i))) {
                 continue;
             }
-            if (!isAlphaNumeric(s.charAt(j))) {
+            if (!isAlpNum(s.charAt(j))) {
+                i--;
                 j--;
                 continue;
             }
-            if (s.charAt(i) == s.charAt(j)) {
-                i++;
-                j--;
-            } else {
-                return false;   
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
             }
+            j--;
         }
+        
         return true;
+        
     }
     
-    public boolean isAlphaNumeric(char c) {
+    public boolean isAlpNum(char c) {
         return ('0' <= c && c <= '9') || ('a' <= c && c < 'z');
     }
 }
