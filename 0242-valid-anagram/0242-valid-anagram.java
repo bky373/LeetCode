@@ -7,12 +7,12 @@ class Solution {
         int[] alpCnt = new int[26];
         for (int i=0; i<s.length(); i++) {
             alpCnt[s.charAt(i) - 'a']++;
-            alpCnt[t.charAt(i) - 'a']--; 
         }
-        for (int cnt : alpCnt) {
-            if (cnt != 0) {
+        for (int i = 0; i < s.length(); i++) {
+            if (alpCnt[t.charAt(i) - 'a'] < 1) {
                 return false;
             }
+            alpCnt[t.charAt(i) - 'a']--;
         }
         return true;
     }
