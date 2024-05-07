@@ -6,17 +6,15 @@ class Solution {
         for (int i=0; i<s.length(); i++) {
             if (pairs.containsKey(s.charAt(i))) {
                 st.push(s.charAt(i));
-            } else if (st.isEmpty()) {
-                return false;
             } else {
+                if (st.isEmpty()) {
+                    return false;
+                }
                 if (s.charAt(i) != pairs.get(st.pop())) {
                     return false;
                 }
             }
         }
-        if (st.isEmpty()) {
-            return true;
-        }
-        return false;
+        return st.isEmpty();
     }
 }
