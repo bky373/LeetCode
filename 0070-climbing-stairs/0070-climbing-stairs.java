@@ -1,15 +1,20 @@
 class Solution {
     public int climbStairs(int n) {
-        int[] ans = new int[n+1];
-        if (n <= 2) {
-            return n;
+        int[] memo = new int[n+1];
+        return checkSteps(0, n, memo);
+    }
+    
+    public int checkSteps(int i, int n, int[] memo) {
+        if (i > n) {
+            return 0;
         }
-        ans[1] = 1;
-        ans[2] = 2;
-        
-        for (int i=3;i<n+1;i++) {
-            ans[i] = ans[i-1] + ans[i-2];
+        if (i == n) {
+            return 1;
         }
-        return ans[n];
+        if (memo[i] > 0) {
+            return memo[i];
+        }
+        memo[i] = checkSteps(i+1, n, memo) + checkSteps(i+2, n, memo);
+        return memo[i];
     }
 }
