@@ -3,14 +3,14 @@ class Solution {
         if (n==1) {
             return n;
         }
-        int stepsBy1 = 1;
-        int stepsBy2 = 2;
+        int a1 = 1;
+        int a2 = 2;
         
         for (int i=3; i<n+1; i++) {
-            int cur = stepsBy1 + stepsBy2;
-            stepsBy1 = stepsBy2;
-            stepsBy2 = cur;
+            int a3 = a1 + a2;
+            a1 = a2;
+            a2 = a3;
         }
-        return stepsBy2;
+        return a2;
     }
 }
