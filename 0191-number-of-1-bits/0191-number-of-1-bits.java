@@ -1,11 +1,5 @@
 class Solution {
     public int hammingWeight(int n) {
-        int sum = 0;
-        while (n != 0) {
-            sum++;
-            n &= (n-1);
-        }
-        return sum;
+        return Integer.bitCount(n);
     }
 }
-// TC: O(1), SC: O(1)
