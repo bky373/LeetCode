@@ -1,14 +1,12 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        int[] rooms = new int[10001];
+        int sum = 0;
+        for (int i = 1; i < nums.length + 1; i++) {
+            sum += i;
+        }
         for (int num : nums) {
-            rooms[num] = 1;
+            sum -= num;
         }
-        for (int i = 0; i <= rooms.length; i++) {
-            if (rooms[i] == 0) {
-                return i;
-            }
-        }
-        return -1;
+        return sum;
     }
 }
