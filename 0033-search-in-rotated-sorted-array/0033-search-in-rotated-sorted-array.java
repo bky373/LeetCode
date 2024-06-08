@@ -6,13 +6,10 @@ class Solution {
         }
         int minIndex = findMinIndex(nums);
         int leftResult = binarySearch(nums, 0, minIndex -1, target);
-        int rightResult = binarySearch(nums, minIndex, nums.length - 1, target);
-        if (leftResult >= 0) {
-            res = leftResult;
-        } else if (rightResult >= 0) {
-            res = rightResult;
+        if (leftResult > -1) {
+            return leftResult;
         }
-        return res;
+        return binarySearch(nums, minIndex, nums.length - 1, target);
     }
     
     private int findMinIndex(int[] nums) {
