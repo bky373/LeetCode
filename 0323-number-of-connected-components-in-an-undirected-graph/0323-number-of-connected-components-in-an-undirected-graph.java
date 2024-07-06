@@ -1,8 +1,8 @@
 class Solution {
-    boolean[] visited;
     
     public int countComponents(int n, int[][] edges) {
-        this.visited = new boolean[n];
+        boolean[] visited = new boolean[n];
+        
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int[] edge : edges) {
             map.computeIfAbsent(edge[0], k -> new ArrayList<>())
@@ -16,19 +16,13 @@ class Solution {
             if (visited[i]) {
                 continue;
             }
-            dfs(i, map);
+            dfs(i, map, visited);
             ans++;
-        }
-        
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                ans++;
-            }
         }
         return ans;
     }
     
-    public void dfs(int k, Map<Integer, List<Integer>> map) {
+    public void dfs(int k, Map<Integer, List<Integer>> map, boolean[] visited) {
         if (visited[k]) {
             return;
         }
@@ -38,7 +32,7 @@ class Solution {
         }
         List<Integer> values = map.get(k);
         for (int v : values) {
-            dfs(v, map);
+            dfs(v, map, visited);
         }
     }
 }
