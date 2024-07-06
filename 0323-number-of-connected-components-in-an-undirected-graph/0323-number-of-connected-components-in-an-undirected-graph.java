@@ -13,9 +13,6 @@ class Solution {
         
         int ans = 0;
         for (int i = 0; i < n; i++) {
-            if (!map.containsKey(i)) {
-                continue;
-            }
             if (visited[i]) {
                 continue;
             }
