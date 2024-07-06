@@ -1,38 +1,36 @@
 class Solution {
     
     public int countComponents(int n, int[][] edges) {
+        int ans = 0;
         boolean[] visited = new boolean[n];
         
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        for (int[] edge : edges) {
-            map.computeIfAbsent(edge[0], k -> new ArrayList<>())
-                    .add(edge[1]);
-            map.computeIfAbsent(edge[1], k -> new ArrayList<>())
-                    .add(edge[0]);
+        List<Integer>[] adjList = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            adjList[i] = new ArrayList<Integer>();
         }
         
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            if (visited[i]) {
-                continue;
-            }
-            dfs(i, map, visited);
-            ans++;
+        for (int i = 0; i < edges.length; i++) {
+            adjList[edges[i][0]].add(edges[i][1]);
+            adjList[edges[i][1]].add(edges[i][0]);
         }
+        
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                ans++;
+                dfs(adjList, visited, i);
+            }
+        }
+        
         return ans;
     }
     
-    public void dfs(int k, Map<Integer, List<Integer>> map, boolean[] visited) {
-        if (visited[k]) {
-            return;
-        }
-        visited[k] = true;
-        if (!map.containsKey(k)) {
-            return;
-        }
-        List<Integer> values = map.get(k);
-        for (int v : values) {
-            dfs(v, map, visited);
+    public void dfs(List<Integer>[] adjList, boolean[] visited, int startNode) {
+        visited[startNode] = true;
+        
+        for (int i=0; i < adjList[startNode].size(); i++) {
+            if (!visited[adjList[startNode].get(i)]) {
+                dfs(adjList, visited, adjList[startNode].get(i));
+            }
         }
     }
 }
