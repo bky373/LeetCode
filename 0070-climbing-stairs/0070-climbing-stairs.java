@@ -1,16 +1,19 @@
 class Solution {
     public int climbStairs(int n) {
-        if (n==1) {
-            return n;
+        if (n == 1) {
+            return 1;
         }
-        int a1 = 1;
-        int a2 = 2;
-        
-        for (int i=3; i<n+1; i++) {
-            int a3 = a1 + a2;
-            a1 = a2;
-            a2 = a3;
+        int first = 1;
+        int second = 2;
+        for (int i=3; i<=n; i++) {
+            int third = first + second;
+            first = second;
+            second = third;
         }
-        return a2;
+        return second;
     }
 }
+/**
+ * time: O(n)
+ * space: O(1)
+ */
