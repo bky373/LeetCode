@@ -10,3 +10,7 @@ class Solution {
         return null;
     }
 }
+/**
+ * time: O(n^2)
+ * space: O(1)
+ */
