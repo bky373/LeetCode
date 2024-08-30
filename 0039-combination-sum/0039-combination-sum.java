@@ -4,7 +4,7 @@ class Solution {
         List<List<Integer>> results = new ArrayList<>();
         LinkedList<Integer> combination = new LinkedList<>();
         int startingIndex = 0;
-        
+        Arrays.sort(candidates);
         this.backtrack(candidates, new ArrayList<Integer>(), startingIndex, target, results);
         return results;
     }
@@ -18,7 +18,7 @@ class Solution {
             return;
         }
         
-        for (int i=start; i<candidates.length; i++) {
+        for (int i=start; i<candidates.length && candidates[i] <= remain; i++) {
             comb.add(candidates[i]);
             backtrack(candidates, comb, i, remain - candidates[i], results);
             comb.removeLast(); 
