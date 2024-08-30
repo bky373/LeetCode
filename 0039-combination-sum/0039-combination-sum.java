@@ -1,22 +1,26 @@
 class Solution {
+    Set<List<Integer>> result = new HashSet<>();
+    
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        List<Integer> combination = new LinkedList<>();
-        backtrack(candidates, target, combination, 0, result);
-        return result;
+        backtrack(candidates, new ArrayList<Integer>(), 0, target);
+        return result.stream().toList();
     }
     
-    void backtrack(int[] candidates, int remain, List<Integer> combination, int startIndex, List<List<Integer>> result) {
-        if (remain == 0) {
-            result.add(new ArrayList<>(combination));
-            return;
-        } else if (remain < 0) {
+    void backtrack(int[] candidates, List<Integer> combination, int sum, int target) {
+        if (sum > target) {
             return;
         }
-        for (int i=startIndex; i<candidates.length; i++) {
+        if (sum == target) {
+            List<Integer> comb =  new ArrayList<>(combination);
+            comb.sort(Comparator.naturalOrder());
+            result.add(comb);
+            return;
+        }
+        
+        for (int i=0; i<candidates.length; i++) {
             combination.add(candidates[i]);
-            backtrack(candidates, remain - candidates[i], combination, i, result);
-            combination.removeLast();
+            backtrack(candidates, combination, sum + candidates[i], target);
+            combination.remove(combination.size() - 1);            
         }
     }
 }
