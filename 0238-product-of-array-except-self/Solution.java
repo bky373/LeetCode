@@ -32,3 +32,7 @@ class Solution {
         return answer;
     }
 }
+/**
+ * TC: O(n), where n is the length of nums.
+ * SC: O(1)
+ */
