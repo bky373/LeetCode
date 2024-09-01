@@ -33,6 +33,6 @@ class Solution {
     }
 }
 /**
- * TC: O(n), where n is the length of nums.
+ * TC: O(n), where n is the number of elements.
  * SC: O(1)
  */
