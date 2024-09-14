@@ -1,75 +1,62 @@
-public class TrieNode {
-    private static final int MAX_SIZE = 26;
-
-    public TrieNode[] subNodes;
-    public boolean isEndOfWord;
+/**
+ * insert
+ * - TC: O(n), where n is the length of word.
+ * - SC: O(n), where n is the length of word.
+ *
+ * search
+ * - TC: O(n), where n is the length of word.
+ * - SC: O(1)
+ *
+ * startWith
+ * - TC: O(n), where n is the length of word.
+ * - SC: O(1)
+ */
+class TrieNode {
+    TrieNode[] children;
+    boolean endOfWord;
 
     public TrieNode() {
-        subNodes = new TrieNode[MAX_SIZE];
-    }
-
-    public boolean contains(char ch) {
-        return subNodes[ch - 'a'] != null;
-    }
-
-    public TrieNode getSubNode(char ch) {
-        return subNodes[ch - 'a'];
-    }
-
-    public void put(char ch, TrieNode node) {
-        subNodes[ch - 'a'] = node;
-    }
-
-    @Override
-    public String toString() {
-        return "TrieNode{sub=" + Arrays.toString(subNodes) + "}";
+        children = new TrieNode[26];
     }
 }
 
-
 class Trie {
-    
-    public TrieNode root;
+    TrieNode root;
 
     public Trie() {
         root = new TrieNode();
     }
 
     public void insert(String word) {
-        TrieNode node = root;
-        for (int i = 0; i < word.length(); i++) {
-            char ch = word.charAt(i);
-            if (!node.contains(ch)) {
-                node.put(ch, new TrieNode());
+        TrieNode cur = root;
+        for (char c : word.toCharArray()) {
+            if (cur.children[c - 'a'] == null) {
+                cur.children[c - 'a'] = new TrieNode();
             }
-            node = node.getSubNode(ch);
+            cur = cur.children[c - 'a'];
         }
-        node.isEndOfWord = true;
+        cur.endOfWord = true;
     }
-    
+
     public boolean search(String word) {
-        TrieNode node = searchPrefix(word);
-        return node != null && node.isEndOfWord;
+        TrieNode node = findPrefixNode(word);
+        return node != null && node.endOfWord;
     }
 
-    public boolean startsWith(String word) {
-        return searchPrefix(word) != null;
+    public boolean startsWith(String prefix) {
+        return findPrefixNode(prefix) != null;
     }
 
-    public TrieNode searchPrefix(String word) {
-        TrieNode node = root;
-        for (int i = 0; i < word.length(); i++) {
-            if (node == null) {
+    private TrieNode findPrefixNode(String prefix) {
+        TrieNode cur = root;
+        for (char c : prefix.toCharArray()) {
+            if (cur.children[c - 'a'] == null) {
                 return null;
             }
-            if (!node.contains(word.charAt(i))) {
-                return null;
-            }
-            node = node.getSubNode(word.charAt(i));
+            cur = cur.children[c - 'a'];
         }
-        return node;
+        return cur;
     }
-
 }
 
 /**
