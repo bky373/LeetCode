@@ -1,20 +1,25 @@
 class Solution {
-    public boolean isValid(String s) {
-        Stack<Character> st = new Stack<>();
+
+    public static boolean isValid(String s) {
         Map<Character, Character> pairs = Map.of('(', ')', '{', '}', '[', ']');
-        
-        for (int i=0; i<s.length(); i++) {
-            if (pairs.containsKey(s.charAt(i))) {
-                st.push(s.charAt(i));
+        Stack<Character> openSt = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (pairs.containsKey(c)) {
+                openSt.push(c);
             } else {
-                if (st.isEmpty()) {
+                if (openSt.isEmpty()) {
                     return false;
                 }
-                if (s.charAt(i) != pairs.get(st.pop())) {
+                if (c != pairs.get(openSt.pop())) {
                     return false;
                 }
             }
         }
-        return st.isEmpty();
+        return openSt.isEmpty();
     }
 }
+/**
+ * - 문제: https://leetcode.com/problems/valid-parentheses/
+ * - TC: O(n), where n is the length of string.
+ * - SC: O(1)
+ */
