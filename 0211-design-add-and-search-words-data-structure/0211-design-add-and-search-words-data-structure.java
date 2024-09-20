@@ -70,7 +70,7 @@ public class WordDictionary {
  *
  * search
  * - TC: O(n*26^d), where n is the length of word and d is the number of dot(.)
- * - SC: O(1)
+ * - SC: O(1) for the search of "well-defined" words without dots, and up to O(M) for the "undefined" words, to keep the recursion stack.
  */
 public class WordDictionary {
     private Node root;
