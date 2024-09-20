@@ -1,6 +1,14 @@
+/**
+ * - 문제: https://leetcode.com/problems/valid-parentheses/
+ * - TC: O(n), where n is the length of string.
+ * - SC: O(1)
+ */
 class Solution {
 
-    public static boolean isValid(String s) {
+    public boolean isValid(String s) {
+        if (s.length() % 2 == 1) {
+            return false;
+        }
         Map<Character, Character> pairs = Map.of('(', ')', '{', '}', '[', ']');
         Stack<Character> openSt = new Stack<>();
         for (char c : s.toCharArray()) {
@@ -18,8 +26,3 @@ class Solution {
         return openSt.isEmpty();
     }
 }
-/**
- * - 문제: https://leetcode.com/problems/valid-parentheses/
- * - TC: O(n), where n is the length of string.
- * - SC: O(1)
- */
